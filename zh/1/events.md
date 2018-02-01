@@ -24,7 +24,7 @@ material:
           function _createZombie(string _name, uint _dna) private {
               zombies.push(Zombie(_name, _dna));
               // 这里触发事件
-          } 
+          }
 
           function _generateRandomDna(string _str) private view returns (uint) {
               uint rand = uint(keccak256(_str));
@@ -58,7 +58,7 @@ material:
           function _createZombie(string _name, uint _dna) private {
               uint id = zombies.push(Zombie(_name, _dna)) - 1;
               NewZombie(id, _name, _dna);
-          } 
+          }
 
           function _generateRandomDna(string _str) private view returns (uint) {
               uint rand = uint(keccak256(_str));
@@ -73,9 +73,9 @@ material:
       }
 ---
 
-我们的合同几乎就要完成了！让我们加上一个**事件**.
+我们的合约几乎就要完成了！让我们加上一个**事件**.
 
-**事件** 是合同和区块链通讯的一种机制。你的前端应用‘监听’某些事件，并做出反应。
+**事件** 是合约和区块链通讯的一种机制。你的前端应用“监听”某些事件，并做出反应。
 
 例子:
 
@@ -91,7 +91,7 @@ function add(uint _x, uint _y) public {
 }
 ```
 
-你的 app 前端可以监听这个事件。javascript实现如下: 
+你的 app 前端可以监听这个事件。JavaScript 实现如下:
 
 ```
 YourContract.IntegersAdded(function(error, result) { 
@@ -99,12 +99,12 @@ YourContract.IntegersAdded(function(error, result) {
 }
 ```
 
-# 测试一把
+# 实战演习
 
-我们想每当一个僵尸创造出来时，我们的前端都能听到这个事件，并将它显示出来。
+我们想每当一个僵尸创造出来时，我们的前端都能监听到这个事件，并将它显示出来。
 
-1. 定义一个 `事件` 叫做 `NewZombie`. 它可以含有 `zombieId` (`uint`), `name` (`string`), 和 `dna` (`uint`).
+1。 定义一个 `事件` 叫做 `NewZombie`。 它有3个参数: `zombieId` (`uint`)， `name` (`string`)， 和 `dna` (`uint`)。
 
-2. 修改 `_createZombie` 函数使得当新僵尸造出来并加入`zombies`数组后，生成事件`NewZombie`。
+2。 修改 `_createZombie` 函数使得当新僵尸造出来并加入`zombies`数组后，生成事件`NewZombie`。
 
-3. 需要定义僵尸`id`. `array.push()` 返回数组的长度类型是`uint`  - 因为数组的第一个元素的索引是 0, `array.push() - 1` 将是我们加入的僵尸的索引。 `zombies.push() - 1` 就是 `id`，数据类型是`uint`。在下一行中你可以把它用到`NewZombie` 事件中。
+3。 需要定义僵尸`id`。 `array.push()` 返回数组的长度类型是`uint`  - 因为数组的第一个元素的索引是 0， `array.push() - 1` 将是我们加入的僵尸的索引。 `zombies.push() - 1` 就是 `id`，数据类型是 `uint`。在下一行中你可以把它用到 `NewZombie` 事件中。
